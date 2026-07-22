@@ -10,9 +10,19 @@
 
             <h4>Product List</h4>
 
-            <a href="{{ route('products.create') }}" class="btn btn-primary">
-                Add Product
-            </a>
+           <div>
+
+    <a href="{{ route('products.export') }}"
+       class="btn btn-success">
+        Export Excel
+    </a>
+
+    <a href="{{ route('products.create') }}"
+       class="btn btn-primary">
+        Add Product
+    </a>
+
+</div>
 
         </div>
 

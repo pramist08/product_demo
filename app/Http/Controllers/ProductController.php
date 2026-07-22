@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\unlink;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -153,5 +155,12 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'status changed successfully');
+    }
+
+
+    public function export(){
+        return Excel::download(
+            new ProductsExport,'Products.xlsx'
+        );
     }
 }
