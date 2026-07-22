@@ -6,6 +6,7 @@ use App\Http\Controllers\unlink;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Exports\ProductsExport;
+use App\Imports\ProductsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
@@ -162,5 +163,16 @@ class ProductController extends Controller
         return Excel::download(
             new ProductsExport,'Products.xlsx'
         );
+    }
+
+
+    public function import(Request $request){
+        $request->validate(['file' => 'required|mimes:xlsx,xls.csv|max:20248',]);
+
+      Excel::import(
+        new ProductsImport,$request->file('file')
+      );  
+
+      return redirect()->route('products.index')->with('success','products imported successfully');
     }
 }

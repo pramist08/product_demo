@@ -37,8 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/edit/{id}', [ProductController::class, 'create'])->name('products.edit');
     Route::get('/products/delete/{id}',[ProductController::class,'delete'])->name('products.delete');
 
-    Route::post('/products/update_status',[ProductController::class,'update_status'])->name('products.status');
-    Route::get('/products/export',[ProductController::Class,'export'])->name('products.export');
+    Route::post('/products/update_status/{id}',[ProductController::class,'update_status'])->name('products.status');
+    Route::get('/products/export',[ProductController::class,'export'])->name('products.export');
+   Route::post('/products/import',[ProductController::class,'import'])->name('products.import');
    
 });
 
