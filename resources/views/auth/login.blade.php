@@ -150,9 +150,9 @@
 
                     @if (Route::has('password.request'))
 
-                        <a href="{{ route('password.request') }}">
+                        <!-- <a href="{{ route('password.request') }}">
                             Forgot Password?
-                        </a>
+                        </a> -->
 
                     @endif
 

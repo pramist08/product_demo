@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductController extends Controller
 {
@@ -159,20 +160,32 @@ class ProductController extends Controller
     }
 
 
-    public function export(){
+    public function export()
+    {
         return Excel::download(
-            new ProductsExport,'Products.xlsx'
+            new ProductsExport,
+            'Products.xlsx'
         );
     }
 
 
-    public function import(Request $request){
+    public function import(Request $request)
+    {
         $request->validate(['file' => 'required|mimes:xlsx,xls.csv|max:20248',]);
 
-      Excel::import(
-        new ProductsImport,$request->file('file')
-      );  
+        Excel::import(
+            new ProductsImport,
+            $request->file('file')
+        );
 
-      return redirect()->route('products.index')->with('success','products imported successfully');
+        return redirect()->route('products.index')->with('success', 'products imported successfully');
+    }
+
+    public function exportpdf()
+    {
+        $products = Product::where('is_delete', 0)->orderBy('id', 'desc')->get();
+
+        $pdf = pdf::loadview('products.pdf', compact('products'));
+        return $pdf->download('products.pdf');
     }
 }

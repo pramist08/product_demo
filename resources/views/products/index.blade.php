@@ -49,6 +49,10 @@
                             Export Excel
                         </a>
 
+                        <a href="{{ route('products.exportpdf') }}"   class="btn btn-danger">
+                            Download Pdf
+                        </a>
+
                         {{-- Add Product --}}
                         <a href="{{ route('products.create') }}"
                            class="btn btn-primary">

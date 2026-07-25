@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   // return view('welcome');
+   return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
@@ -35,12 +36,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/edit/{id}', [ProductController::class, 'create'])->name('products.edit');
-    Route::get('/products/delete/{id}',[ProductController::class,'delete'])->name('products.delete');
+    Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
 
-    Route::post('/products/update_status/{id}',[ProductController::class,'update_status'])->name('products.status');
-    Route::get('/products/export',[ProductController::class,'export'])->name('products.export');
-   Route::post('/products/import',[ProductController::class,'import'])->name('products.import');
-   
+    Route::post('/products/update_status/{id}', [ProductController::class, 'update_status'])->name('products.status');
+    Route::get('/products/export', [ProductController::class, 'export'])->name('products.export');
+    Route::post('/products/import', [ProductController::class, 'import'])->name('products.import');
+    Route::get('/products/export-pdf', [ProductController::class, 'exportpdf'])->name('products.exportpdf');
 });
 
 require __DIR__ . '/auth.php';
